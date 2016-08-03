@@ -1,0 +1,32 @@
+Running in verbose mode
+
+-----------------------------------------------------------------
+  pg_upgrade run on Tue Aug  2 19:38:59 2016
+-----------------------------------------------------------------
+
+check for "/usr/local/Cellar/postgresql/9.4.5_2/bin" failed: No such file or directory
+
+Running in verbose mode
+
+-----------------------------------------------------------------
+  pg_upgrade run on Tue Aug  2 19:39:28 2016
+-----------------------------------------------------------------
+
+check for "/usr/local/Cellar/postgresql/9.5.0/bin" failed: No such file or directory
+
+Running in verbose mode
+
+-----------------------------------------------------------------
+  pg_upgrade run on Tue Aug  2 19:41:17 2016
+-----------------------------------------------------------------
+
+check for "/usr/local/Cellar/postgresql/9.4.5_2/bin" failed: No such file or directory
+
+Running in verbose mode
+
+-----------------------------------------------------------------
+  pg_upgrade run on Tue Aug  2 19:41:27 2016
+-----------------------------------------------------------------
+
+check for "/usr/local/Cellar/postgresql/9.5.0/bin" failed: No such file or directory
+
