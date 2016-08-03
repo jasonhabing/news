@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @newspaper.name %>
+</p>
+
+<p>
+  <strong>Website:</strong>
+  <%= @newspaper.website %>
+</p>
+
+<p>
+  <strong>Main rss feed url:</strong>
+  <%= @newspaper.main_rss_feed_url %>
+</p>
+
+<p>
+  <strong>Circulation:</strong>
+  <%= @newspaper.circulation %>
+</p>
+
+<p>
+  <strong>Owner:</strong>
+  <%= @newspaper.owner %>
+</p>
+
+<%= link_to 'Edit', edit_newspaper_path(@newspaper) %> |
+<%= link_to 'Back', newspapers_path %>

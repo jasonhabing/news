@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  website: MyString
+  main_rss_feed_url: MyString
+  circulation: 1
+  owner: MyString
+
+two:
+  name: MyString
+  website: MyString
+  main_rss_feed_url: MyString
+  circulation: 1
+  owner: MyString
