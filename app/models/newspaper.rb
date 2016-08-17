@@ -8,12 +8,16 @@ class Newspaper < ActiveRecord::Base
 
 	def save_new_stories
 		puts "Fetching stories for #{self.name}"
+		begin
 		if self.main_rss_feed_url.present?
 			feed = self.get_feed
 			puts "Found feed with #{feed.entries.count} entries.  First feed updated on #{feed.entries.first.published}."
+			duplicates = 0
+			uniques	= 0
 			feed.entries.each do |entry|
-				unless Story.exists?(:id => entry.id)
-		      	unless Story.exists?(:title => entry.title)  
+				if (Story.exists?(:id => entry.id) || Story.exists?(:title => entry.title))  
+					duplicates += 1
+				else
 		      		story = Story.new(
 			        :title => entry.title, 
 			        :url => entry.id, 
@@ -21,12 +25,16 @@ class Newspaper < ActiveRecord::Base
 			        :newspaper_id => self.id, 
 			        )
 			        story.save
-			        puts "saved news story #{story.title} "
-		      	end
+			        uniques += 1
 		      	end
 			end
+			puts "#{duplicates} stories already existed and were not duplicated.  Successfully created #{uniques} unique new stories."
 		else
-			puts "Did not update stories for #{self.name} - newspaper does not have an RSS feed."
+			puts "Did not update stories for #{self.name} - newspaper does not have an RSS feed entered in the database."
+		end
+
+		rescue Feedjira::NoParserAvailable
+			puts "Can't parse #{self.name} -- ID: #{self.id} due to Feedjira::NoParserAvailable error"
 		end
 	end
 
@@ -37,6 +45,6 @@ class Newspaper < ActiveRecord::Base
 		end
 	end
 
-	
+
 
 end
