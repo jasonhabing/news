@@ -8,3 +8,11 @@ ERROR:  database "my_database_development" already exists
 STATEMENT:  CREATE DATABASE my_database_development;
 ERROR:  database "my_database_development" already exists
 STATEMENT:  CREATE DATABASE my_database_development;
+ERROR:  database "my_database_development" already exists
+STATEMENT:  CREATE DATABASE my_database_development;
+ERROR:  column stories.guid does not exist at character 40
+HINT:  Perhaps you meant to reference the column "stories.id".
+STATEMENT:  SELECT  1 AS one FROM "stories"  WHERE "stories"."guid" = 'http://www.usatoday.com/story/news/politics/onpolitics/2016/08/15/donald-trump-media-accountability-survey/88758820/' LIMIT 1
+ERROR:  column stories.guid does not exist at character 40
+HINT:  Perhaps you meant to reference the column "stories.id".
+STATEMENT:  SELECT  1 AS one FROM "stories"  WHERE "stories"."guid" = 'http://www.usatoday.com/story/news/politics/onpolitics/2016/08/15/donald-trump-media-accountability-survey/88758820/' LIMIT 1
