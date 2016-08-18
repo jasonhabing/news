@@ -18,6 +18,8 @@ gem 'feedjira'
 
 gem "awesome_print"
 
+gem 'colorize'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
