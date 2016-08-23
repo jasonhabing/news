@@ -28,3 +28,11 @@ class Float
   def tan; Math.tan(self); end
   def log10; Math.log10(self); end
 end
+
+class String
+
+  def sanitize
+    self.downcase.gsub(/[^a-z0-9\s]/i, '')
+  end
+
+end
