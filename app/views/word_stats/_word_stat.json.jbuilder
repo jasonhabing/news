@@ -1,0 +1,2 @@
+json.extract! word_stat, :id, :name, :one_month_frequency, :one_week_frequency, :one_day_frequency, :half_day_frequency, :quarter_day_frequency, :one_hour_frequency, :created_at, :updated_at
+json.url word_stat_url(word_stat, format: :json)

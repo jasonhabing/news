@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  one_month_frequency: 1.5
+  one_week_frequency: 1.5
+  one_day_frequency: 1.5
+  half_day_frequency: 1.5
+  quarter_day_frequency: 1.5
+  one_hour_frequency: 1.5
+
+two:
+  name: MyString
+  one_month_frequency: 1.5
+  one_week_frequency: 1.5
+  one_day_frequency: 1.5
+  half_day_frequency: 1.5
+  quarter_day_frequency: 1.5
+  one_hour_frequency: 1.5

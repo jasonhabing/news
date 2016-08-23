@@ -1,0 +1,1 @@
+json.partial! "word_stats/word_stat", word_stat: @word_stat

@@ -1,0 +1,45 @@
+<%= form_for(@word_stat) do |f| %>
+  <% if @word_stat.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@word_stat.errors.count, "error") %> prohibited this word_stat from being saved:</h2>
+
+      <ul>
+      <% @word_stat.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :one_month_frequency %><br>
+    <%= f.text_field :one_month_frequency %>
+  </div>
+  <div class="field">
+    <%= f.label :one_week_frequency %><br>
+    <%= f.text_field :one_week_frequency %>
+  </div>
+  <div class="field">
+    <%= f.label :one_day_frequency %><br>
+    <%= f.text_field :one_day_frequency %>
+  </div>
+  <div class="field">
+    <%= f.label :half_day_frequency %><br>
+    <%= f.text_field :half_day_frequency %>
+  </div>
+  <div class="field">
+    <%= f.label :quarter_day_frequency %><br>
+    <%= f.text_field :quarter_day_frequency %>
+  </div>
+  <div class="field">
+    <%= f.label :one_hour_frequency %><br>
+    <%= f.text_field :one_hour_frequency %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

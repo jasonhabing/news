@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @word_stat.name %>
+</p>
+
+<p>
+  <strong>One month frequency:</strong>
+  <%= @word_stat.one_month_frequency %>
+</p>
+
+<p>
+  <strong>One week frequency:</strong>
+  <%= @word_stat.one_week_frequency %>
+</p>
+
+<p>
+  <strong>One day frequency:</strong>
+  <%= @word_stat.one_day_frequency %>
+</p>
+
+<p>
+  <strong>Half day frequency:</strong>
+  <%= @word_stat.half_day_frequency %>
+</p>
+
+<p>
+  <strong>Quarter day frequency:</strong>
+  <%= @word_stat.quarter_day_frequency %>
+</p>
+
+<p>
+  <strong>One hour frequency:</strong>
+  <%= @word_stat.one_hour_frequency %>
+</p>
+
+<%= link_to 'Edit', edit_word_stat_path(@word_stat) %> |
+<%= link_to 'Back', word_stats_path %>

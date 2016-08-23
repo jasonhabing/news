@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :word_stats
+
+  resources :words
+
   resources :stories
 
   resources :newspapers

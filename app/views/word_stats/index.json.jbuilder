@@ -1,0 +1,1 @@
+json.array! @word_stats, partial: 'word_stats/word_stat', as: :word_stat

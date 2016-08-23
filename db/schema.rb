@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160815011540) do
+ActiveRecord::Schema.define(version: 20160823024144) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,28 @@ ActiveRecord::Schema.define(version: 20160815011540) do
     t.datetime "published"
     t.text     "summary"
     t.integer  "newspaper_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "parsed_date"
+  end
+
+  create_table "word_stats", force: true do |t|
+    t.string   "name"
+    t.float    "one_month_frequency"
+    t.float    "one_week_frequency"
+    t.float    "one_day_frequency"
+    t.float    "half_day_frequency"
+    t.float    "quarter_day_frequency"
+    t.float    "one_hour_frequency"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "all_time_count"
+  end
+
+  create_table "words", force: true do |t|
+    t.string   "name"
+    t.integer  "story_id"
+    t.datetime "story_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

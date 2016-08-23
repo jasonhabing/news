@@ -28,4 +28,3 @@ task :diagnose => :environment do
 	end
 
 end
-
