@@ -89,13 +89,19 @@ class String
     counts = self.get_count(hour_time_range, previous_sets_to_compare)
     stories = self.get_stories(hour_time_range)
     t_score = self.get_t_score(hour_time_range, previous_sets_to_compare)
+    puts ""
+    puts "Word: #{self}"
     puts "Counts: #{counts}"
     puts "T_score: #{t_score}"
+    puts ""
+    puts "Stories containing '#{self}' in last #{hour_time_range} hours:"
     stories.each do |s|
       puts "#{s.title}"
     end
+    puts ""
+    puts ""
+    return nil
   end
-
 end
 
 
