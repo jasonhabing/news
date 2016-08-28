@@ -45,3 +45,14 @@ STATEMENT:  SELECT "stories".* FROM "stories"  WHERE (created_date IS NULL)
 ERROR:  column "created_date" does not exist at character 43
 HINT:  Perhaps you meant to reference the column "stories.created_at".
 STATEMENT:  SELECT "stories".* FROM "stories"  WHERE (created_date IS NULL)
+ERROR:  database "my_database_development" already exists
+STATEMENT:  CREATE DATABASE my_database_development;
+ERROR:  operator does not exist: timestamp without time zone > numeric at character 50
+HINT:  No operator matches the given name and argument type(s). You might need to add explicit type casts.
+STATEMENT:  SELECT "words".* FROM "words"  WHERE (story_date > 86414.096335)
+ERROR:  operator does not exist: timestamp without time zone > numeric at character 50
+HINT:  No operator matches the given name and argument type(s). You might need to add explicit type casts.
+STATEMENT:  SELECT "words".* FROM "words"  WHERE (story_date > 86441.93375)
+ERROR:  operator does not exist: character varying = integer at character 52
+HINT:  No operator matches the given name and argument type(s). You might need to add explicit type casts.
+STATEMENT:  SELECT COUNT(*) FROM "words"  WHERE "words"."name" = 119686

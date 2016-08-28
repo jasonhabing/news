@@ -36,7 +36,7 @@ has_many :words
 		else
 			common_word_t_scores = []
 			common_words.each do |c|
-				word_t_score = Word.where(:name => c).last.get_t_score(24, 7)
+				word_t_score = Word.where(:name => c).last.get_t_score(24, 10)
 				common_word_t_scores << word_t_score
 			end
 		end
@@ -45,6 +45,7 @@ has_many :words
 
 	def get_similarity_ranking(story)
 		word_scores = self.get_common_word_scores(story)
+
 		#need to finish this method	
 	end
 
