@@ -56,3 +56,9 @@ STATEMENT:  SELECT "words".* FROM "words"  WHERE (story_date > 86441.93375)
 ERROR:  operator does not exist: character varying = integer at character 52
 HINT:  No operator matches the given name and argument type(s). You might need to add explicit type casts.
 STATEMENT:  SELECT COUNT(*) FROM "words"  WHERE "words"."name" = 119686
+ERROR:  database "my_database_development" already exists
+STATEMENT:  CREATE DATABASE my_database_development;
+ERROR:  database "my_database_development" already exists
+STATEMENT:  CREATE DATABASE my_database_development;
+ERROR:  database "my_database_development" already exists
+STATEMENT:  CREATE DATABASE my_database_development;

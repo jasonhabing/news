@@ -39,27 +39,54 @@ class String
     self.downcase.gsub(/[^a-z0-9\s]/i, '')
   end
 
+  # Example: "olympics".frequency(24) will count how many times "olympics" was used in the last 24 hours divided by the total words used in that same timespan
+  def frequency(number_of_hours)
+    word_count = Word.where("name = ? AND story_date > ?", self, Time.now - number_of_hours.hours).count
+    total_words = Word.where("story_date > ?", Time.now - number_of_hours.hours).count
+    return word_count.to_f / total_words.to_f
+  end
+
   # 
   def get_count(number_of_hours, previous_sets_to_compare)
     daily_numbers = []
+    time_start = Time.now - (number_of_hours*previous_sets_to_compare).hours
+    words = Word.where("name = ? AND story_date > ? AND story_date <= ?", self, time_start, Time.now)
+    times_used = []
+    words.each do |w|
+      times_used << w.story_date
+    end
     [*1..previous_sets_to_compare+1].each do |h|
-     time_start = Time.now - (number_of_hours*h).hours
-     time_end = Time.now - ((number_of_hours*h)-(1*number_of_hours)).hours
-     word_count = Word.where("name = ? AND story_date > ? AND story_date <= ?", self, time_start, time_end).count
-     daily_numbers << word_count
+      time_start = Time.now - (number_of_hours*h).hours
+      time_end = Time.now - ((number_of_hours*h)-(1*number_of_hours)).hours
+      count = times_used.select {|s| s < time_end and s > time_start}.count
+      daily_numbers << count
     end
     return daily_numbers
   end
 
-  #Calculates t score of a word for a recent timeframe.  For example, "olmpics".get_t_score(24, 7) will get the t-score for the word count in the last 24 hours compared to the previous 7 24 hour periods.
+  #Calculates t score of a word for a recent timeframe.  For example, "olmpics".get_t_score(24, 7) will get the t-score for the word count in the last 24 hours compared to the previous 7 24 hour periods.  Currently works at a speed of ~5 words a second.
   def get_t_score(number_of_hours, previous_sets_to_compare)
         current_count = Word.where("name = ? AND story_date > ? AND story_date <= ?", self, Time.now - number_of_hours.hours, Time.now).count
         word_counts = self.get_count(number_of_hours, previous_sets_to_compare)
         previous_mean = word_counts.drop(1).mean
         standard_deviation = word_counts.drop(1).standard_deviation
-        sample_size = 7
+        sample_size = previous_sets_to_compare
         t_score = (current_count - previous_mean) / (standard_deviation / sample_size.to_f.sqrt)
         return t_score
+  end
+
+  def get_sanitized_t_score(number_of_hours, previous_sets_to_compare)
+    score = self.get_t_score(number_of_hours, previous_sets_to_compare)
+    if score == Float::INFINITY
+      count = self.get_count(number_of_hours, 1)[0]
+      if count > 3
+        return 30
+      else
+        return 0
+      end
+    else
+      return score
+    end
   end
 
   # Example: "olympics".get_stores(24) will get all stories about the Olympics in the last 24 hours.
@@ -91,16 +118,18 @@ class String
     mean = counts.mean
     standard_deviation = counts.standard_deviation
     t_score = self.get_t_score(hour_time_range, previous_sets_to_compare)
+    sanitized_t_score = self.get_sanitized_t_score(hour_time_range, previous_sets_to_compare)
     puts ""
     puts "Word: #{self}"
     puts "Counts: #{counts}"
     puts "Mean: #{mean}"
     puts "Standard deviation: #{standard_deviation}"
     puts "T_score: #{t_score}"
+    puts "Sanitized T_score: #{sanitized_t_score}"
     puts ""
     puts "Stories containing '#{self}' in last #{hour_time_range} hours:"
     stories.each do |s|
-      puts "#{s.title}"
+      puts "#{s.title} | #{s.id}"
     end
     puts ""
     puts ""
