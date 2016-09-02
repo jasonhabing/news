@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160823024144) do
+ActiveRecord::Schema.define(version: 20160902215053) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_stat_statements"
+
+  create_table "matches", force: true do |t|
+    t.integer  "story_one_id"
+    t.integer  "story_two_id"
+    t.integer  "human_review"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "algorithm_review"
+  end
 
   create_table "newspapers", force: true do |t|
     t.string   "name"

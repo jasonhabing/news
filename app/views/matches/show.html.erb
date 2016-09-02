@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Story one:</strong>
+  <%= @match.story_one_id %>
+</p>
+
+<p>
+  <strong>Story two:</strong>
+  <%= @match.story_two_id %>
+</p>
+
+<p>
+  <strong>Human review:</strong>
+  <%= @match.human_review %>
+</p>
+
+<%= link_to 'Edit', edit_match_path(@match) %> |
+<%= link_to 'Back', matches_path %>

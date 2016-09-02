@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :matches
+
   resources :word_stats
 
   resources :words

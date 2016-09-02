@@ -3,6 +3,7 @@ class Story < ActiveRecord::Base
 validates :title, length: { maximum: 250 }, presence: true
 validates :url, presence: true
 has_many :words
+belongs_to :newspaper
 
 	def parse
 		if self.parsed_date.present?
@@ -64,11 +65,20 @@ has_many :words
 		story_length_mean = ((self.title.split.size)+(story.title.split.size))/2
 		rarity_boost = 1
 		common_words.each do |c|
- 		  score = 1.01**((0.0306-c.frequency(48))/0.0005)  #0.03 should be replaced with most frequent word frequency
+ 		  score = 1+((3.2**((0.037 - c.frequency(48)) / 0.005))/5000)
  		  rarity_boost = rarity_boost * score
 		end
 		score = (common_words.count).to_f / (story_length_mean).to_f * rarity_boost.to_f
 	end	
+
+	def algorithm_test(story)
+		if self.similar(story) > 0.80
+			self.algorithm_match(story)
+			puts "found a match"
+		else
+			self.algorithm_nonmatch(story)
+		end
+ 	end
 
 	# Story.get_words_by_t_score(10) will return a hash with t_scores for the last 10 hours.
 	def get_all_t_scores(lookback_window)
@@ -86,6 +96,54 @@ has_many :words
 		end
 		words_and_t_scores = words_and_t_scores.sort_by {|k,v| v}.reverse
 		return words_and_t_scores
+	end
+
+	def human_match(story)
+		match = self.get_or_create_match(story)
+		match.human_review = 1
+		match.save
+	end	
+
+	def human_nonmatch(story)
+		match = self.get_or_create_match(story)
+		match.human_review = 0
+		match.save
+	end	
+
+	def algorithm_match(story)
+		match = self.get_or_create_match(story)
+		match.algorithm_review = 1
+		match.save
+	end
+
+	def algorithm_nonmatch(story)
+		match = self.get_or_create_match(story)
+		match.algorithm_review = 0
+		match.save
+	end
+
+	def get_or_create_match(story)
+		existing_match_1 = Match.exists?(:story_one_id => self.id, :story_two_id => story.id)
+		existing_match_2 = Match.exists?(:story_one_id => story.id, :story_two_id => self.id)
+		if existing_match_1
+			return Match.where(:story_one_id => self.id, :story_two_id => story.id).first
+		elsif existing_match_2
+			return Match.where(:story_one_id => story.id, :story_two_id => self.id).first
+		else
+			match = Match.new
+			match.story_one_id = self.id	
+			match.story_two_id = story.id
+			match.save
+			return Match.where(:story_one_id => self.id, :story_two_id => story.id).first
+		end
+	end
+
+	def same_story?(story)
+		return self.id == story.id
+	end
+
+	def same_newspaper?(story)
+		self.newspaper == story.newspaper
 	end
 	
 end

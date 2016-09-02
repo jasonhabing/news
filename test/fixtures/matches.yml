@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  story_one_id: 1
+  story_two_id: 1
+  human_review: 1
+
+two:
+  story_one_id: 1
+  story_two_id: 1
+  human_review: 1
